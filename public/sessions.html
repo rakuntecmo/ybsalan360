@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>Seanslar</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body
+  class="min-h-screen bg-cover bg-center flex flex-col items-center justify-start p-4"
+  style="background-image: url('/background.png');"
+>
+  <div class="bg-white bg-opacity-90 p-8 rounded-2xl shadow-lg max-w-3xl w-full text-center">
+    <h1 class="text-3xl font-bold text-gray-800 mb-6">Zirve Seans Programı</h1>
+
+    <!-- Kod Giriş Alanı -->
+    <div class="mb-6">
+      <input type="text" id="codeInput" placeholder="Seans kodunu girin" class="border px-4 py-2 rounded w-64 text-center">
+      <button onclick="checkCode()" class="ml-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded">Gönder</button>
+    </div>
+
+    <!-- Seans Listesi -->
+    <ul id="sessionList" class="text-left space-y-4 text-lg">
+      <li id="yasemin" class="p-4 rounded border bg-white bg-opacity-80">
+        <strong>09:00 - 10:00</strong> — <span class="font-semibold">Yasemin ARSLAN</span><br>
+        <span class="text-sm text-gray-600">Veri Bilimci</span>
+      </li>
+      <li id="burak" class="p-4 rounded border bg-white bg-opacity-80">
+        <strong>10:00 - 11:00</strong> — <span class="font-semibold">Burak İSLAM</span><br>
+        <span class="text-sm text-gray-600">ERP Uzmanı</span>
+      </li>
+      <li id="icten" class="p-4 rounded border bg-white bg-opacity-80">
+        <strong>11:00 - 12:00</strong> — <span class="font-semibold">İçten YAZICIOĞLU</span><br>
+        <span class="text-sm text-gray-600">Proje Yöneticisi</span>
+      </li>
+      <li class="bg-yellow-100 px-4 py-2 rounded text-center font-medium text-red-600">
+        12:00 - 13:00 — Öğle Arası
+      </li>
+      <li id="cagan" class="p-4 rounded border bg-white bg-opacity-80">
+        <strong>13:00 - 14:00</strong> — <span class="font-semibold">Çağan CEBE</span><br>
+        <span class="text-sm text-gray-600">Bilgi Güvenlik Uzmanı</span>
+      </li>
+      <li id="atakan" class="p-4 rounded border bg-white bg-opacity-80">
+        <strong>14:00 - 15:00</strong> — <span class="font-semibold">Atakan ŞENGÖZ</span><br>
+        <span class="text-sm text-gray-600">Yazılım Mühendisi</span>
+      </li>
+      <li id="birden" class="p-4 rounded border bg-white bg-opacity-80">
+        <strong>15:00 - 16:00</strong> — <span class="font-semibold">Birden Tuluğ SİYAHİ</span><br>
+        <span class="text-sm text-gray-600">BiLİG OpEX Kurucu</span>
+      </li>
+    </ul>
+
+    <div class="mt-8">
+      <a href="/dashboard" class="text-blue-600 underline">← Dashboard’a Geri Dön</a>
+    </div>
+  </div>
+
+  <!-- Script -->
+  <script>
+    const codes = {
+      "123456": "yasemin",
+      "234567": "burak",
+      "345678": "icten",
+      "456789": "cagan",
+      "567890": "atakan",
+      "678901": "birden"
+    };
+
+    // Sayfa yüklenince localStorage verisiyle kutuları yeşil yap
+    window.onload = () => {
+      const savedSessions = JSON.parse(localStorage.getItem("attendedSessions")) || [];
+      savedSessions.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+          el.classList.remove("border");
+          el.classList.add("bg-green-200", "border-green-600");
+        }
+      });
+    };
+
+    function checkCode() {
+      const code = document.getElementById("codeInput").value.trim();
+
+      if (codes[code]) {
+        const matchedId = codes[code];
+        const el = document.getElementById(matchedId);
+        el.classList.remove("border");
+        el.classList.add("bg-green-200", "border-green-600");
+
+        // Görsel için localStorage'a kaydet
+        let saved = JSON.parse(localStorage.getItem("attendedSessions")) || [];
+        if (!saved.includes(matchedId)) {
+          saved.push(matchedId);
+          localStorage.setItem("attendedSessions", JSON.stringify(saved));
+        }
+
+        // Email sessionStorage'ta olmalı (login'de set edilmişti)
+        const email = sessionStorage.getItem("email");
+        if (email) {
+          fetch("/attend", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email: email, sessionId: matchedId })
+          });
+        } else {
+          alert("E-posta bulunamadı. Lütfen giriş yaparak deneyin.");
+        }
+
+      } else {
+        alert("Kod geçersiz!");
+      }
+    }
+  </script>
+</body>
+</html>

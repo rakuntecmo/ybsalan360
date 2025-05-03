@@ -4,6 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Zirve Yol Haritası</title>
+
+  <!-- Oturum kontrolü -->
+  <script>
+    if (!sessionStorage.getItem("email")) {
+      window.location.href = "/login.html";
+    }
+  </script>
+
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body
@@ -46,4 +54,7 @@
       <a href="/dashboard" class="inline-block mt-4 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded">
         ← Ana Sayfaya Geri Dön
       </a>
-      
+    </div>
+  </div>
+</body>
+</html>

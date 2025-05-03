@@ -4,6 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>YBS Alan 360 Zirvesi - Dashboard</title>
+
+  <!-- Oturum kontrolü -->
+  <script>
+    if (!sessionStorage.getItem("email")) {
+      window.location.href = "/login.html";
+    }
+  </script>
+
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body
@@ -32,14 +40,12 @@
     const name = sessionStorage.getItem("name") || "";
     const university = sessionStorage.getItem("university") || "";
 
-    // Baş harfleri büyük yap
     const formattedName = name
       .toLowerCase()
       .split(" ")
       .map(word => word.charAt(0).toUpperCase() + word.slice(1))
       .join(" ");
 
-    // Üniversite tam ad eşlemesi
     const universityMap = {
       "ADÜ": "Aydın Adnan Menderes Üniversitesi",
       "İTÜ": "İstanbul Teknik Üniversitesi",

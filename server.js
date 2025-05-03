@@ -52,7 +52,7 @@ app.post('/admin-login', (req, res) => {
     res.send(`
       <script>
         alert("Şifre hatalı!");
-        window.location.href = "/admin-login";
+        window.location.href = "/admin-login.html";
       </script>
     `);
   }

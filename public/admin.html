@@ -6,14 +6,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script src="https://cdn.tailwindcss.com"></script>
 
+  <!-- Admin oturum kontrolü -->
   <script>
     if (sessionStorage.getItem("isAdmin") !== "true") {
-      window.location.href = "/admin-login";
+      window.location.href = "/admin-login.html";
     }
 
     function logoutAdmin() {
       sessionStorage.removeItem("isAdmin");
-      window.location.href = "/admin-login";
+      window.location.href = "/admin-login.html";
     }
 
     const sessions = ["yasemin", "burak", "icten", "cagan", "atakan", "birden"];
@@ -77,7 +78,7 @@
           </tr>
         </thead>
         <tbody id="participant-list">
-          <!-- JS ile katılımcılar buraya eklenir -->
+          <!-- Katılımcılar JS ile eklenecek -->
         </tbody>
       </table>
     </div>

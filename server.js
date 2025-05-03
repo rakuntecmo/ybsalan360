@@ -46,7 +46,7 @@ app.get('/admin-login', (req, res) => {
 // Admin şifre kontrolü
 app.post('/admin-login', (req, res) => {
   const { password } = req.body;
-  const adminPassword = "admin123";
+  const adminPassword = "alikocistifa1907";
 
   if (password === adminPassword) {
     res.send(`

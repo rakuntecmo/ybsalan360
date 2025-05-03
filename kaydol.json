@@ -1,40 +1,10 @@
 [
   {
-    "name": "taha ali akar",
-    "email": "huseyinbursa76@gmail.com",
-    "phone": "05345118438",
-    "university": "adü",
+    "name": "bananiünini",
+    "email": "bananas@gmail.com",
+    "phone": "14785236",
+    "university": "ADÜ",
     "password": "12345.",
-    "attended": [
-      "yasemin"
-    ]
-  },
-  {
-    "name": "rakun aba",
-    "email": "akartahaali@gmail.com",
-    "phone": "05345118454",
-    "university": "hıvurbe",
-    "password": "123345."
-  },
-  {
-    "name": "rencoe eıu",
-    "email": "ahmet@gmail.com",
-    "phone": "594494949",
-    "university": "dede",
-    "password": "12345."
-  },
-  {
-    "name": "voıuberıuvu",
-    "email": "babakele@gmail.com",
-    "phone": "53669844445",
-    "university": "erfwf",
-    "password": "12345."
-  },
-  {
-    "name": "ernouvuebr",
-    "email": "bjrbufb@gmail.com",
-    "phone": "515848485848",
-    "university": "adü",
-    "password": "12345."
+    "attended": []
   }
 ]

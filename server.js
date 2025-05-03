@@ -14,31 +14,24 @@ app.use(express.static('public'));
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
-
 app.get('/register', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'register.html'));
 });
-
 app.get('/login', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'login.html'));
 });
-
 app.get('/dashboard', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'dashboard.html'));
 });
-
 app.get('/roadmap', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'roadmap.html'));
 });
-
 app.get('/sessions', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'sessions.html'));
 });
-
 app.get('/admin', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'admin.html'));
 });
-
 app.get('/admin-login', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'admin-login.html'));
 });
@@ -69,13 +62,28 @@ app.post('/admin-login', (req, res) => {
 app.post('/submit', (req, res) => {
   const formData = req.body;
 
+  if (!formData.name || !formData.email || !formData.university || !formData.password) {
+    return res.status(400).send("Eksik bilgi gönderildi.");
+  }
+
   let data = [];
   if (fs.existsSync('kaydol.json')) {
     data = JSON.parse(fs.readFileSync('kaydol.json'));
   }
 
-  data.push(formData);
+  const newUser = {
+    name: formData.name,
+    email: formData.email,
+    phone: formData.phone || '',
+    university: formData.university,
+    password: formData.password,
+    attended: []
+  };
+
+  data.push(newUser);
   fs.writeFileSync('kaydol.json', JSON.stringify(data, null, 2));
+
+  console.log("Yeni kayıt:", newUser);
 
   res.redirect('/?success=true');
 });
@@ -105,7 +113,7 @@ app.post('/login', (req, res) => {
   }
 });
 
-// Katılım kaydı (backend'e seans yaz)
+// Seans katılımı kaydetme
 app.post('/attend', (req, res) => {
   const { email, sessionId } = req.body;
 

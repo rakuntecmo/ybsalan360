@@ -6,5 +6,21 @@
     "university": "ADÜ",
     "password": "87245434",
     "attended": []
+  },
+  {
+    "name": "taha ali akar",
+    "email": "huseyinbursa76@gmail.com",
+    "phone": "05345118438",
+    "university": "İTÜ",
+    "password": "14785236",
+    "attended": []
+  },
+  {
+    "name": "rakun ali",
+    "email": "rakun@gmail.com",
+    "phone": "258963147",
+    "university": "KOÜ",
+    "password": "12345678",
+    "attended": []
   }
 ]

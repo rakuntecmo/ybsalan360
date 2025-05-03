@@ -65,11 +65,11 @@ app.post('/submit', (req, res) => {
   res.redirect('/?success=true');
 });
 
-// Giriş işlemi
+// Giriş işlemi (GÜNCELLENDİ)
 app.post('/login', (req, res) => {
   const { email, password } = req.body;
 
-  if (!fs.existsSync('kaydol.json')) return res.send("Kayıt bulunamadı.");
+  if (!fs.existsSync('kaydol.json')) return res.redirect('/login?error=1');
   const data = JSON.parse(fs.readFileSync('kaydol.json'));
   const match = data.find(user => user.email === email && user.password === password);
 
@@ -83,7 +83,7 @@ app.post('/login', (req, res) => {
       </script>
     `);
   } else {
-    res.send("E-posta veya şifre hatalı.");
+    res.redirect('/login?error=1');
   }
 });
 
@@ -106,14 +106,14 @@ app.post('/attend', (req, res) => {
   res.status(200).send("Katılım kaydedildi.");
 });
 
-// Admin veri alma
+// Admin panel veri
 app.get('/admin-data', (req, res) => {
   if (!fs.existsSync('kaydol.json')) return res.json([]);
   const data = JSON.parse(fs.readFileSync('kaydol.json'));
   res.json(data);
 });
 
-// ✅ Kullanıcı silme
+// Kullanıcı silme
 app.post('/delete-user', (req, res) => {
   const { email } = req.body;
   if (!email) return res.status(400).send("Email eksik.");
@@ -126,7 +126,7 @@ app.post('/delete-user', (req, res) => {
   res.status(200).send("Kullanıcı silindi.");
 });
 
-// ✅ Şifre sıfırlama
+// Şifre sıfırlama
 app.post('/reset-password', (req, res) => {
   const { email } = req.body;
   if (!email) return res.status(400).send("Email eksik.");

@@ -10,7 +10,12 @@
   class="min-h-screen bg-cover bg-center flex items-center justify-center p-4"
   style="background-image: url('/background.png');"
 >
-  <div class="bg-white bg-opacity-90 rounded-2xl shadow-lg p-6 w-full max-w-md">
+  <div class="bg-white bg-opacity-90 rounded-2xl shadow-lg p-6 w-full max-w-md w-full relative">
+    <!-- Hatalı giriş mesajı -->
+    <div id="errorMessage" class="hidden bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4 text-sm" role="alert">
+      <strong>Hata!</strong> E-posta veya şifre hatalı.
+    </div>
+
     <h2 class="text-3xl font-bold mb-6 text-center text-gray-800">Giriş Yap</h2>
     <form action="/login" method="POST" class="space-y-4">
       <div>
@@ -28,5 +33,12 @@
       </div>
     </form>
   </div>
+
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get("error") === "1") {
+      document.getElementById("errorMessage").classList.remove("hidden");
+    }
+  </script>
 </body>
 </html>

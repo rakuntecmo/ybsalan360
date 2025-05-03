@@ -10,6 +10,11 @@
   class="flex flex-col items-center justify-center min-h-screen bg-cover bg-center p-6"
   style="background-image: url('/background.png');"
 >
+  <!-- Başarılı kayıt mesajı -->
+  <div id="successMessage" class="hidden mb-4 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded text-sm text-center w-full max-w-sm" role="alert">
+    <strong>Başarılı!</strong> Hesabınız başarıyla oluşturuldu.
+  </div>
+
   <div class="bg-white bg-opacity-90 rounded-2xl shadow-lg p-6 w-full max-w-sm text-center">
     <h1 class="text-3xl md:text-5xl font-extrabold text-gray-800 mb-8 leading-snug">
       YBS Alan 360 Zirvesi
@@ -24,5 +29,12 @@
       </a>
     </div>
   </div>
+
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get("success") === "true") {
+      document.getElementById("successMessage").classList.remove("hidden");
+    }
+  </script>
 </body>
 </html>

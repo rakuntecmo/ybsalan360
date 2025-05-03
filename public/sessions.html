@@ -56,6 +56,7 @@
       <a href="/dashboard" class="inline-block mt-4 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded">
         ← Ana Sayfaya Geri Dön
       </a>
+    </div>
   </div>
 
   <script>
@@ -68,8 +69,12 @@
       "678901": "birden"
     };
 
+    const email = sessionStorage.getItem("email") || "guest";
+    const localKey = `attendedSessions_${email}`;
+
+    // Sayfa açıldığında önceki katılımları yükle
     window.onload = () => {
-      const savedSessions = JSON.parse(localStorage.getItem("attendedSessions")) || [];
+      const savedSessions = JSON.parse(localStorage.getItem(localKey)) || [];
       savedSessions.forEach(id => {
         const el = document.getElementById(id);
         if (el) {
@@ -81,32 +86,35 @@
 
     function checkCode() {
       const code = document.getElementById("codeInput").value.trim();
-      if (codes[code]) {
-        const matchedId = codes[code];
-        const el = document.getElementById(matchedId);
-        el.classList.remove("border");
-        el.classList.add("bg-green-200", "border-green-600");
+      const matchedId = codes[code];
 
-        let saved = JSON.parse(localStorage.getItem("attendedSessions")) || [];
-        if (!saved.includes(matchedId)) {
-          saved.push(matchedId);
-          localStorage.setItem("attendedSessions", JSON.stringify(saved));
-        }
-
-        const email = sessionStorage.getItem("email");
-        if (email) {
-          fetch("/attend", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ email: email, sessionId: matchedId })
-          });
-        } else {
-          alert("E-posta bulunamadı. Lütfen giriş yapın.");
-        }
-
-      } else {
+      if (!matchedId) {
         alert("Kod geçersiz!");
+        return;
       }
+
+      const el = document.getElementById(matchedId);
+      el.classList.remove("border");
+      el.classList.add("bg-green-200", "border-green-600");
+
+      let saved = JSON.parse(localStorage.getItem(localKey)) || [];
+      if (!saved.includes(matchedId)) {
+        saved.push(matchedId);
+        localStorage.setItem(localKey, JSON.stringify(saved));
+      }
+
+      if (email !== "guest") {
+        fetch("/attend", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email: email, sessionId: matchedId })
+        });
+      } else {
+        alert("Lütfen giriş yapın.");
+        window.location.href = "/login.html";
+      }
+
+      document.getElementById("codeInput").value = "";
     }
   </script>
 </body>

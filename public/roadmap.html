@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Zirve Yol Haritası</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
@@ -9,19 +10,40 @@
   class="min-h-screen bg-cover bg-center flex items-center justify-center p-4"
   style="background-image: url('/background.png');"
 >
-  <div class="bg-white bg-opacity-90 p-8 rounded-2xl shadow-lg max-w-3xl w-full text-center">
-    <h1 class="text-3xl font-bold text-gray-800 mb-6">Zirve Yol Haritası</h1>
-    
-    <ul class="text-left text-gray-700 space-y-4">
-      <li><strong>09:00</strong> – Açılış Konuşması</li>
-      <li><strong>10:00</strong> – Panel: YBS Alanında Gelecek</li>
-      <li><strong>12:00</strong> – Öğle Arası</li>
-      <li><strong>13:00</strong> – Atölye Çalışmaları</li>
-      <li><strong>15:00</strong> – Katılım Belgesi Dağıtımı</li>
-    </ul>
-    
-    <div class="mt-6">
-      <a href="/dashboard" class="text-blue-600 underline">Geri Dön</a>
+  <div class="bg-white bg-opacity-90 p-6 rounded-2xl shadow-xl w-full max-w-3xl">
+    <h1 class="text-2xl md:text-3xl font-bold text-center text-gray-800 mb-6">
+      Zirvenin Yol Haritası
+    </h1>
+
+    <div class="space-y-4 text-gray-700 text-sm md:text-base">
+      <div class="border-l-4 border-blue-500 pl-4">
+        <p><strong>09:00</strong> – Açılış Konuşması</p>
+      </div>
+      <div class="border-l-4 border-purple-500 pl-4">
+        <p><strong>09:00 - 10:00</strong> – Yasemin ARSLAN – Veri Bilimi</p>
+      </div>
+      <div class="border-l-4 border-purple-500 pl-4">
+        <p><strong>10:00 - 11:00</strong> – Burak İSLAM – ERP Sistemleri</p>
+      </div>
+      <div class="border-l-4 border-purple-500 pl-4">
+        <p><strong>11:00 - 12:00</strong> – İçten YAZICIOĞLU – Proje Yönetimi</p>
+      </div>
+      <div class="border-l-4 border-yellow-500 pl-4">
+        <p><strong>12:00 - 13:00</strong> – Öğle Arası</p>
+      </div>
+      <div class="border-l-4 border-purple-500 pl-4">
+        <p><strong>13:00 - 14:00</strong> – Çağan CEBE – Bilgi Güvenliği</p>
+      </div>
+      <div class="border-l-4 border-purple-500 pl-4">
+        <p><strong>14:00 - 15:00</strong> – Atakan ŞENGÖZ – Yazılım Geliştirme</p>
+      </div>
+      <div class="border-l-4 border-purple-500 pl-4">
+        <p><strong>15:00 - 16:00</strong> – Birden Tuluğ SİYAHİ – Girişimcilik & OpEX</p>
+      </div>
+    </div>
+
+    <div class="mt-8 text-center">
+      <a href="/dashboard" class="text-blue-600 underline">← Dashboard’a Geri Dön</a>
     </div>
   </div>
 </body>

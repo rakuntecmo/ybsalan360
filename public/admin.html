@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <title>Admin Paneli - Katılımcı Listesi</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script src="https://cdn.tailwindcss.com"></script>
 
   <script>
@@ -33,10 +34,10 @@
 
           const row = document.createElement("tr");
           row.innerHTML = `
-            <td class="border px-2 py-2 text-center">${index + 1}</td>
-            <td class="border px-2 py-2">${user.name || "-"}</td>
-            <td class="border px-2 py-2">${user.email || "-"}</td>
-            <td class="border px-2 py-2">${user.university || "-"}</td>
+            <td class="border px-2 py-2 text-center text-sm">${index + 1}</td>
+            <td class="border px-2 py-2 text-sm">${user.name || "-"}</td>
+            <td class="border px-2 py-2 text-sm">${user.email || "-"}</td>
+            <td class="border px-2 py-2 text-sm">${user.university || "-"}</td>
             <td class="border px-2 py-2">
               <div class="flex gap-1 justify-center">${progressBoxes}</div>
             </td>
@@ -51,23 +52,23 @@
   </script>
 </head>
 <body
-  class="min-h-screen bg-cover bg-center p-6"
+  class="min-h-screen bg-cover bg-center p-4"
   style="background-image: url('/background.png');"
 >
-  <div class="max-w-6xl mx-auto bg-white bg-opacity-90 shadow-xl rounded-xl p-6">
-    <div class="flex justify-between items-center mb-6">
-      <h1 class="text-3xl font-bold text-gray-800">Admin Paneli</h1>
-      <button onclick="logoutAdmin()" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded">
+  <div class="max-w-7xl mx-auto bg-white bg-opacity-90 shadow-xl rounded-xl p-6">
+    <div class="flex flex-col sm:flex-row justify-between items-center mb-6 gap-4">
+      <h1 class="text-2xl font-bold text-gray-800">Admin Paneli</h1>
+      <button onclick="logoutAdmin()" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded text-sm">
         Çıkış Yap
       </button>
     </div>
 
-    <p class="text-gray-700 mb-4">Katılımcıların seanslara katılım durumu:</p>
+    <p class="text-gray-700 mb-4 text-sm">Katılımcıların seanslara katılım durumu:</p>
 
     <div class="overflow-x-auto">
-      <table class="table-auto w-full text-left border-collapse bg-white bg-opacity-80">
+      <table class="table-auto w-full text-left border-collapse bg-white bg-opacity-80 text-sm">
         <thead>
-          <tr class="bg-gray-200 text-gray-700 text-sm">
+          <tr class="bg-gray-200 text-gray-700">
             <th class="border px-2 py-2">#</th>
             <th class="border px-2 py-2">Ad Soyad</th>
             <th class="border px-2 py-2">E-posta</th>
@@ -75,8 +76,8 @@
             <th class="border px-2 py-2 text-center">İlerleme</th>
           </tr>
         </thead>
-        <tbody id="participant-list" class="text-sm text-gray-800">
-          <!-- Katılımcılar buraya JS ile eklenecek -->
+        <tbody id="participant-list">
+          <!-- JS ile katılımcılar buraya eklenir -->
         </tbody>
       </table>
     </div>

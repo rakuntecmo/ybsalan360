@@ -2,41 +2,27 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>YBS Alan 360 Zirvesi</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body
-  class="min-h-screen bg-cover bg-center flex flex-col items-center justify-center p-4"
+  class="flex flex-col items-center justify-center min-h-screen bg-cover bg-center p-6"
   style="background-image: url('/background.png');"
 >
+  <div class="bg-white bg-opacity-90 rounded-2xl shadow-lg p-6 w-full max-w-sm text-center">
+    <h1 class="text-3xl md:text-5xl font-extrabold text-gray-800 mb-8 leading-snug">
+      YBS Alan 360 Zirvesi
+    </h1>
 
-  <!-- Kayıt Başarılı Mesaj Kutusu -->
-  <div id="successMessageContainer" class="w-full max-w-md"></div>
-
-  <!-- Ana Başlık Kutusu -->
-  <div class="bg-white bg-opacity-90 p-6 rounded-xl shadow-md text-center max-w-2xl w-full mb-8">
-    <h1 class="text-5xl md:text-6xl font-extrabold text-gray-800">YBS Alan 360 Zirvesi</h1>
+    <div class="flex flex-col gap-4">
+      <a href="/register.html" class="bg-amber-400 hover:bg-amber-500 text-white font-semibold py-3 px-4 rounded text-center">
+        Kayıt Ol
+      </a>
+      <a href="/login.html" class="bg-white border border-gray-300 hover:bg-gray-100 text-blue-700 font-semibold py-3 px-4 rounded text-center">
+        Giriş Yap
+      </a>
+    </div>
   </div>
-
-  <!-- Butonlar -->
-  <div class="flex flex-col gap-4 w-60">
-    <a href="/register" class="bg-amber-400 hover:bg-amber-500 text-white font-semibold py-3 rounded text-center shadow">Kayıt Ol</a>
-    <a href="/login" class="bg-white bg-opacity-90 border hover:bg-gray-100 text-blue-700 font-semibold py-3 rounded text-center shadow">Giriş Yap</a>
-  </div>
-
-  <!-- Başarı mesajı gösterimi -->
-  <script>
-    const params = new URLSearchParams(window.location.search);
-    if (params.get("success") === "true") {
-      const container = document.getElementById("successMessageContainer");
-      const box = document.createElement("div");
-      box.className = "bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-6 text-center shadow";
-      box.innerText = "✅ Kayıt başarılı!";
-      container.appendChild(box);
-      setTimeout(() => {
-        box.remove();
-      }, 5000);
-    }
-  </script>
 </body>
 </html>

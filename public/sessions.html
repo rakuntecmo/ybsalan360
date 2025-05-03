@@ -69,19 +69,27 @@
       "678901": "birden"
     };
 
-    const email = sessionStorage.getItem("email") || "guest";
+    const email = sessionStorage.getItem("email");
     const localKey = `attendedSessions_${email}`;
 
-    // Sayfa açıldığında önceki katılımları yükle
+    // Seansları sunucudan çekip renklendir
     window.onload = () => {
-      const savedSessions = JSON.parse(localStorage.getItem(localKey)) || [];
-      savedSessions.forEach(id => {
-        const el = document.getElementById(id);
-        if (el) {
-          el.classList.remove("border");
-          el.classList.add("bg-green-200", "border-green-600");
-        }
-      });
+      if (!email) return;
+
+      fetch("/admin-data")
+        .then(res => res.json())
+        .then(data => {
+          const user = data.find(u => u.email === email);
+          if (user && user.attended) {
+            user.attended.forEach(id => {
+              const el = document.getElementById(id);
+              if (el) {
+                el.classList.remove("border");
+                el.classList.add("bg-green-200", "border-green-600");
+              }
+            });
+          }
+        });
     };
 
     function checkCode() {
@@ -103,7 +111,7 @@
         localStorage.setItem(localKey, JSON.stringify(saved));
       }
 
-      if (email !== "guest") {
+      if (email) {
         fetch("/attend", {
           method: "POST",
           headers: { "Content-Type": "application/json" },

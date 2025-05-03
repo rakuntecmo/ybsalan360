@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Admin oturum kontrolü -->
   <script>
     if (sessionStorage.getItem("isAdmin") !== "true") {
       window.location.href = "/admin-login.html";
@@ -18,6 +17,39 @@
     }
 
     const sessions = ["yasemin", "burak", "icten", "cagan", "atakan", "birden"];
+
+    async function deleteUser(email) {
+      const onay = confirm(`${email} adresli kullanıcıyı silmek istiyor musunuz?`);
+      if (!onay) return;
+
+      const res = await fetch("/delete-user", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email })
+      });
+
+      if (res.ok) {
+        alert("Kullanıcı silindi.");
+        location.reload();
+      } else {
+        alert("Silme başarısız.");
+      }
+    }
+
+    async function resetPassword(email) {
+      const res = await fetch("/reset-password", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email })
+      });
+
+      const data = await res.json();
+      if (res.ok) {
+        alert(`${email} için yeni şifre: ${data.newPassword}`);
+      } else {
+        alert("Şifre sıfırlanamadı.");
+      }
+    }
 
     window.onload = async () => {
       try {
@@ -41,6 +73,10 @@
             <td class="border px-2 py-2 text-sm">${user.university || "-"}</td>
             <td class="border px-2 py-2">
               <div class="flex gap-1 justify-center">${progressBoxes}</div>
+            </td>
+            <td class="border px-2 py-2 flex flex-col gap-1">
+              <button onclick="resetPassword('${user.email}')" class="bg-blue-500 text-white text-xs px-2 py-1 rounded">Şifre Yenile</button>
+              <button onclick="deleteUser('${user.email}')" class="bg-red-500 text-white text-xs px-2 py-1 rounded">Sil</button>
             </td>
           `;
           tbody.appendChild(row);
@@ -75,6 +111,7 @@
             <th class="border px-2 py-2">E-posta</th>
             <th class="border px-2 py-2">Üniversite</th>
             <th class="border px-2 py-2 text-center">İlerleme</th>
+            <th class="border px-2 py-2 text-center">İşlemler</th>
           </tr>
         </thead>
         <tbody id="participant-list">

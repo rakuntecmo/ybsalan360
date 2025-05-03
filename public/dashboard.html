@@ -3,33 +3,53 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dashboard - YBS Alan 360 Zirvesi</title>
+  <title>YBS Alan 360 Zirvesi - Dashboard</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body
   class="min-h-screen bg-cover bg-center flex items-center justify-center p-4"
   style="background-image: url('/background.png');"
 >
-  <div class="bg-white bg-opacity-90 p-6 rounded-2xl shadow-xl w-full max-w-lg text-center">
-    <h1 class="text-2xl md:text-3xl font-bold text-gray-800 mb-4">
+  <div class="bg-white bg-opacity-90 rounded-2xl shadow-lg p-8 w-full max-w-lg text-center">
+    <h1 class="text-2xl sm:text-3xl font-bold mb-4">
       Hoş geldiniz <span id="name" class="text-blue-700"></span>!
     </h1>
-    <p class="text-gray-700 mb-6">Üniversiteniz: <span id="university" class="font-medium"></span></p>
+    <p class="text-gray-700 text-lg mb-6">
+      Üniversiteniz: <span id="university" class="font-semibold text-gray-900"></span>
+    </p>
 
-    <div class="flex flex-col gap-4">
-      <a href="/roadmap.html" class="bg-green-600 hover:bg-green-700 text-white font-semibold py-3 rounded">
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <a href="/roadmap.html" class="bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg w-full">
         Zirvenin Yol Haritası
       </a>
-      <a href="/sessions.html" class="bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 rounded">
+      <a href="/sessions.html" class="bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 px-6 rounded-lg w-full">
         Seanslara Katıl
       </a>
     </div>
   </div>
 
   <script>
-    // Session verilerini çek
-    document.getElementById("name").textContent = sessionStorage.getItem("name") || "Katılımcı";
-    document.getElementById("university").textContent = sessionStorage.getItem("university") || "Bilinmiyor";
+    const name = sessionStorage.getItem("name") || "";
+    const university = sessionStorage.getItem("university") || "";
+
+    // Baş harfleri büyük yap
+    const formattedName = name
+      .toLowerCase()
+      .split(" ")
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ");
+
+    // Üniversite tam ad eşlemesi
+    const universityMap = {
+      "ADÜ": "Aydın Adnan Menderes Üniversitesi",
+      "İTÜ": "İstanbul Teknik Üniversitesi",
+      "KOÜ": "Kocaeli Üniversitesi"
+    };
+
+    const fullUniversity = universityMap[university.toUpperCase()] || university;
+
+    document.getElementById("name").textContent = formattedName;
+    document.getElementById("university").textContent = fullUniversity;
   </script>
 </body>
 </html>
